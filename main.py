@@ -6,8 +6,8 @@ Created on Tue Apr 24 18:48:36 2018
 """
 import requests
 import time
-import multiprocessing
-import threading
+#import multiprocessing
+#import threading
 
 def fetch(url):
     
@@ -23,7 +23,7 @@ def fetch(url):
             next_url.append(i)
     except:
         print('Tree end')
-    global reward
+    #global reward
     reward = json_data['reward']
     '''
     print()
@@ -31,7 +31,7 @@ def fetch(url):
     print()
     print('Reward = ' + str(reward))
     '''
-    global reward_list
+    #global reward_list
     reward_list.append(reward)
     
     #return list(next_url), children, reward
@@ -44,13 +44,13 @@ next_url.append(input_url)
 
 start = time.time()
 
-#for url in next_url:
- #   fetch(url)
+for url in next_url:
+    fetch(url)
  
-t = threading.Thread(target = fetch, args = (next_url,))
+#t = threading.Thread(target = fetch, args = (next_url,))
  
-t.start()
-t.join()
+#t.start()
+#t.join()
 
 #print(next_url)
 #print(reward_list)
