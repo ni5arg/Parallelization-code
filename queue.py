@@ -1,4 +1,14 @@
 
+# API calls will begin at the apply() method, with the request body passed as 'input'
+# For more details, see algorithmia.com/developers/algorithm-development/languages
+
+'''
+This algorithm takes a URL as an inout (without quotes) and returns the sum of reaward values that are fetched from the URL and its URL children.
+
+For example:
+    Input = http://www.xyz.com/
+    Output = 155
+'''
 
 import threading
 import queue
@@ -18,7 +28,7 @@ def fetch_worker(url_q, reward_list):
             json_data = requests.get(url).json()
 
             # queue more url_q tasks
-            for child in json_data.get('children', []): #No duplicate children
+            for child in json_data.get('children', []): 
                 url_q.put(child)
 
             # add reward to list
@@ -47,7 +57,7 @@ def fetch(url):
     return sum(reward_list)
 
 
-input_url = input('Enter a URL. \n')#http://algo.work/interview/a
+input_url = input('Enter a URL. \n')
 start = time.time()
 
 ans = fetch(input_url)
